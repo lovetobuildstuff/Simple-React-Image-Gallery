@@ -2,31 +2,32 @@
 const galleryContainer = document.querySelector('.react-gallery');
 
 // Create new array with URLs for images
+let baseUrl = 'https://lovetobuildstuff.neocities.org/git_files/react-gallery/';
 let imgUrls = [
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imghetr.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgishn.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgslei.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgkoa2.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imglbac.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imglsic.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imglwaa.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imglwar.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgmhaa.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgmsur.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgndan.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgnmot.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/img744.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgaaye.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgaaza.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgagrs.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgasty.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgdinn.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgoflod.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgpala.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgrbun.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgrdae.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgvvia.jpg',
-	'https://lovetobuildstuff.neocities.org/git_files/react-gallery/imgwdon.jpg'
+	'imghetr.jpg',
+	'imgishn.jpg',
+	'imgslei.jpg',
+	'imgkoa2.jpg',
+	'imglbac.jpg',
+	'imglsic.jpg',
+	'imglwaa.jpg',
+	'imglwar.jpg',
+	'imgmhaa.jpg',
+	'imgmsur.jpg',
+	'imgndan.jpg',
+	'imgnmot.jpg',
+	'img744.jpg',
+	'imgaaye.jpg',
+	'imgaaza.jpg',
+	'imgagrs.jpg',
+	'imgasty.jpg',
+	'imgdinn.jpg',
+	'imgoflod.jpg',
+	'imgpala.jpg',
+	'imgrbun.jpg',
+	'imgrdae.jpg',
+	'imgvvia.jpg',
+	'imgwdon.jpg'
 ];
 
 // Component for gallery image
@@ -52,44 +53,39 @@ class GalleryModal extends React.Component {
 
   }}
 
-// Component for gallery
 class Gallery extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showModal: false,
       url: '' };
 
-
     this.openModal = this.openModal.bind(this);
-
     this.closeModal = this.closeModal.bind(this);
   }
-
-  render() {
-    return (
-      React.createElement("div", { refs: "gallery-container", className: "container-fluid gallery-container" },
-      React.createElement("div", { className: "row" },
-
-      imgUrls.map((url, index) => {
-        return React.createElement("div", { className: "col-sm-6 col-md-3 col-xl-2" },
-        React.createElement("div", { className: "gallery-card" },
-        React.createElement(GalleryImage, { className: "gallery-thumbnail", src: url, alt: 'Image number ' + (index + 1) }),
-
-        React.createElement("span", { className: "card-icon-open fa fa-expand", value: url, onClick: e => this.openModal(url, e) })));
-
-      })),
-
-      React.createElement(GalleryModal, { isOpen: this.state.showModal, onClick: this.closeModal, src: this.state.url })));
-  }
+	render() {
+		return (
+			React.createElement("div", { refs: "gallery-container", className: "container-fluid gallery-container" },
+				React.createElement("div", { className: "row" },
+					imgUrls.map((url, index) => {
+						return React.createElement("div", { className: "col-sm-6 col-md-3 col-xl-2" },
+							React.createElement("div", { className: "gallery-card" },
+								React.createElement(GalleryImage, { className: "gallery-thumbnail", src: baseUrl + url, alt: 'Image number ' + (index + 1) }),
+								React.createElement("span", { className: "card-icon-open fa fa-expand", value: url, onClick: e => this.openModal(url, e) })
+							)
+						);
+					})
+				),
+				React.createElement(GalleryModal, { isOpen: this.state.showModal, onClick: this.closeModal, src: this.state.url })
+			)
+		);
+	}
 
   // open modal dialog
   openModal(url, e) {
     this.setState({
       showModal: true,
       url: url });
-
   }
 
   // close modal dialog
@@ -97,7 +93,6 @@ class Gallery extends React.Component {
     this.setState({
       showModal: false,
       url: '' });
-
   }}
 
 // render the gallery
