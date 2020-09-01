@@ -3,6 +3,7 @@ const galleryContainer = document.querySelector('.react-gallery');
 
 // Create new array with URLs for images
 let baseUrl = 'https://lovetobuildstuff.neocities.org/git_files/react-gallery/';
+// concat 'thunb/' or 'full/' between these
 let imgUrls = [
 	'imghetr.jpg',
 	'imgishn.jpg',
@@ -70,13 +71,13 @@ class Gallery extends React.Component {
 					imgUrls.map((url, index) => {
 						return React.createElement("div", { className: "col-sm-6 col-md-3 col-xl-2" },
 							React.createElement("div", { className: "gallery-card" },
-								React.createElement(GalleryImage, { className: "gallery-thumbnail", src: baseUrl + url, alt: 'Image number ' + (index + 1) }),
+								React.createElement(GalleryImage, { className: "gallery-thumbnail", src: baseUrl + 'thumb/' + url, alt: 'Image number ' + (index + 1) }),
 								React.createElement("span", { className: "card-icon-open fa fa-expand", value: url, onClick: e => this.openModal(url, e) })
 							)
 						);
 					})
 				),
-				React.createElement(GalleryModal, { isOpen: this.state.showModal, onClick: this.closeModal, src: this.state.url })
+				React.createElement(GalleryModal, { isOpen: this.state.showModal, onClick: this.closeModal, src: baseUrl + 'full/' + this.state.url })
 			)
 		);
 	}
@@ -99,3 +100,4 @@ class Gallery extends React.Component {
 ReactDOM.render(
 React.createElement(Gallery, { imgUrls: imgUrls }),
 galleryContainer);
+
